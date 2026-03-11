@@ -1,3 +1,23 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+// Thêm thư viện Cloud Firestore
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAlxYN-puZO2p8J-XJ6uykETqovyQcpp1s",
+    authDomain: "dautay-7a837.firebaseapp.com",
+    projectId: "dautay-7a837",
+    storageBucket: "dautay-7a837.firebasestorage.app",
+    messagingSenderId: "217721270233",
+    appId: "1:217721270233:web:58fb7b48141430d57533c8",
+    measurementId: "G-J003E8GHS2"
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+// Khởi tạo Database
+const db = getFirestore(app);
+
 document.addEventListener('DOMContentLoaded', () => {
     const cartIcon = document.getElementById('cart-icon');
     const closeCart = document.getElementById('close-cart');
@@ -7,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartItemsContainer = document.getElementById('cart-items');
     const cartCount = document.querySelector('.cart-count');
     const cartTotal = document.getElementById('cart-total');
+    // Truy xuất nút Thanh toán
+    const checkoutBtn = document.querySelector('.checkout-btn');
 
     let cart = [];
 
@@ -97,11 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             updateCartUI();
-            
+
             // Show cart and add bounce animation to the cart icon
             cartSidebar.classList.add('open');
             overlay.classList.add('show');
-            
+
             cartIcon.style.transform = 'scale(1.2)';
             setTimeout(() => { cartIcon.style.transform = 'scale(1)'; }, 200);
         });
@@ -128,4 +150,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize UI
     updateCartUI();
+
+    // =============== GỬI LÊN FIREBASE ===============
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', async () => {
+            if (cart.length === 0) {
+                alert("Bạn chưa có sản phẩm nào trong giỏ hàng!");
+                return;
+            }
+
+            // Thay đổi nút để báo hiệu đang chờ mạng
+            checkoutBtn.textContent = 'Đang xử lý...';
+            checkoutBtn.disabled = true;
+
+            try {
+                // Tạo một bản ghi mới trong bộ sưu tập (Collection) tên là 'orders' trên Firestore
+                const docRef = await addDoc(collection(db, "orders"), {
+                    items: cart, // Lưu toàn bộ giỏ hàng
+                    totalAmount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0), // Tính tổng tiền
+                    createdAt: new Date() // Lưu thời gian đặt
+                });
+
+                alert(`Thanh toán thành công! Mã đơn hàng của bạn là: ${docRef.id}`);
+
+                // Trả giỏ hàng về trống sau khi mua xong
+                cart = [];
+                updateCartUI();
+                toggleCart();
+
+            } catch (e) {
+                console.error("Lỗi khi thêm bản ghi: ", e);
+                alert("Có lỗi xảy ra khi lưu dữ liệu lên hệ thống!");
+            } finally {
+                // Khôi phục trạng thái nút bấm
+                checkoutBtn.textContent = 'Thanh Toán';
+                checkoutBtn.disabled = false;
+            }
+        });
+    }
 });
