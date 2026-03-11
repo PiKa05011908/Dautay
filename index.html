@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA Fashion | Premium Streetwear</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">AURA.</div>
+        <div class="nav-links">
+            <a href="#">BỘ SƯU TẬP</a>
+            <a href="#">NAM</a>
+            <a href="#">NỮ</a>
+        </div>
+        <div class="cart-icon" id="cart-icon">
+            <i class="ri-shopping-cart-2-line"></i>
+            <span class="cart-count">0</span>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Giỏ hàng của bạn</h2>
+            <button id="close-cart"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items goes here -->
+        </div>
+        <div class="cart-footer">
+            <div class="total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total">0 ₫</span>
+            </div>
+            <button class="checkout-btn">Thanh Toán</button>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <header class="hero">
+        <img src="assets/hero_banner_1773159716938.png" alt="Hero Banner" class="hero-bg">
+        <div class="hero-content">
+            <h1>ĐỊNH HÌNH<br><span class="gradient-text">PHONG CÁCH</span></h1>
+            <p>Khám phá bộ sưu tập mùa Thu - Đông mới nhất. Thể hiện cá tính riêng của bạn với phong cách dẫn đầu xu hướng.</p>
+            <button class="cta-btn">Khám Phá Ngay <i class="ri-arrow-right-line"></i></button>
+        </div>
+    </header>
+
+    <main class="products-section">
+        <div class="section-header">
+            <h2>Sản Phẩm <span class="gradient-text">Nổi Bật</span></h2>
+            <div class="filter-pills">
+                <span class="active">Tất cả</span>
+                <span>Áo</span>
+                <span>Quần</span>
+                <span>Giày</span>
+            </div>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-id="1" data-price="850000" data-name="Premium Black Hoodie" data-image="assets/black_hoodie_1773159964136.png">
+                <div class="img-container">
+                    <img src="assets/black_hoodie_1773159964136.png" alt="Black Hoodie">
+                    <div class="add-to-cart-overlay">
+                        <button class="add-btn"><i class="ri-shopping-bag-add-line"></i> Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="category">Áo Hoodie</span>
+                    <h3>Premium Black Hoodie</h3>
+                    <p class="price">850,000 ₫</p>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-id="2" data-price="1200000" data-name="Vintage Denim Jacket" data-image="assets/denim_jacket_1773159993079.png">
+                <div class="img-container">
+                    <img src="assets/denim_jacket_1773159993079.png" alt="Denim Jacket">
+                    <div class="add-to-cart-overlay">
+                        <button class="add-btn"><i class="ri-shopping-bag-add-line"></i> Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="category">Áo Khoác</span>
+                    <h3>Vintage Denim Jacket</h3>
+                    <p class="price">1,200,000 ₫</p>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-id="3" data-price="2500000" data-name="Minimalist White Sneakers" data-image="assets/white_sneakers_1773160130881.png">
+                <div class="img-container">
+                    <img src="assets/white_sneakers_1773160130881.png" alt="White Sneakers">
+                    <div class="add-to-cart-overlay">
+                        <button class="add-btn"><i class="ri-shopping-bag-add-line"></i> Thêm vào giỏ</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="category">Giày</span>
+                    <h3>Minimalist White Sneakers</h3>
+                    <p class="price">2,500,000 ₫</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">AURA.</div>
+            <p>© 2026 AURA Fashion. Built by Antigravity.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
